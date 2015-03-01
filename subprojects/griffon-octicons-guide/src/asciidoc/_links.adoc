@@ -1,0 +1,4 @@
+
+:link_octicons: link:https://github.com/stephenhutchings/octicons.font[OctIcons, window="_blank"]
+:api_link_octicons_icon_javafx: link:api/griffon/javafx/support/octicons/OctIcon.html[griffon.javafx.support.octicons.OctIcon, window="_blank"]
+:api_link_octicons_icon_swing: link:api/griffon/swing/support/octicons/OctIcon.html[griffon.swing.support.octicons.OctIcon, window="_blank"]

@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.2">
+<meta name="author" content="Andres Almiray">
+<title>Griffon Typ Icon Font Plugin</title>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
+<link href='./css/octicons.css' rel='stylesheet'>
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Griffon Typ Icon Font Plugin</h1>
+<div class="details">
+<span id="author" class="author">Andres Almiray</span><br>
+<span id="revnumber">version 1.0.0</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_usage">2. Usage</a>
+<ul class="sectlevel2">
+<li><a href="#_swing">2.1. Swing</a></li>
+<li><a href="#_javafx">2.2. JavaFX</a></li>
+<li><a href="#_action_resources">2.3. Action Resources</a></li>
+</ul>
+</li>
+<li><a href="#_configuration">3. Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#_gradle">3.1. Gradle</a>
+<ul class="sectlevel3">
+<li><a href="#_automatic">3.1.1. Automatic</a></li>
+<li><a href="#_manual">3.1.2. Manual</a></li>
+</ul>
+</li>
+<li><a href="#_maven">3.2. Maven</a></li>
+</ul>
+</li>
+<li><a href="#_modules">4. Modules</a>
+<ul class="sectlevel2">
+<li><a href="#_javafx_2">4.1. JavaFX</a></li>
+<li><a href="#_swing_2">4.2. Swing</a></li>
+</ul>
+</li>
+<li><a href="#_links">5. Links</a></li>
+<li><a href="#icon_cheat_cheet">6. Icon Cheat Sheet</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/stephenhutchings/octicons.font" target="_blank">OctIcons</a> gives you scalable vector icons.
+This plugin enables toolkit specific icon support.</p>
+</div>
+<div class="paragraph">
+<p>Currently supported Octicons version is <code>2.2.0</code>.</p>
+</div>
+<div class="paragraph">
+<p>Octicons is &#169; 2012-2015 GitHub</p>
+</div>
+<div class="paragraph">
+<p>When using the GitHub logos, be sure to follow the GitHub logo guidelines (<a href="https://github.com/logos" class="bare">https://github.com/logos</a>)</p>
+</div>
+<div class="paragraph">
+<p>Font License: SIL OFL 1.1 (<a href="http://scripts.sil.org/OFL" class="bare">http://scripts.sil.org/OFL</a>)<br>
+Applies to all font files</p>
+</div>
+<div class="paragraph">
+<p>Code License: MIT (<a href="http://choosealicense.com/licenses/mit/" class="bare">http://choosealicense.com/licenses/mit/</a>)<br>
+Applies to all other files</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage"><a class="anchor" href="#_usage"></a>2. Usage</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_swing"><a class="anchor" href="#_swing"></a>2.1. Swing</h3>
+<div class="paragraph">
+<p>The <code>griffon-octicons-swing:1.0.0</code> JAR provides a new Icon class: <code><a href="api/griffon/swing/support/octicons/OctIcon.html" target="_blank">griffon.swing.support.octicons.OctIcon</a></code>.
+You may use this class with any Swing component that supports an Icon property.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_javafx"><a class="anchor" href="#_javafx"></a>2.2. JavaFX</h3>
+<div class="paragraph">
+<p>The <code>griffon-octicons-javafx:1.0.0</code> JAR provides a new Node class: <code><a href="api/griffon/javafx/support/octicons/OctIcon.html" target="_blank">griffon.javafx.support.octicons.OctIcon</a></code>.
+You may use this class with any JavaFX control that accepts a graphic property. You may also use the icon directly as
+it is a subclass of <code>javafx.scene.control.Label</code>. The icon class can be used inside an FXML file too.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+
+<span class="comment">&lt;?import javafx.scene.control.Button?&gt;</span>
+<span class="comment">&lt;?import javafx.scene.layout.GridPane?&gt;</span>
+<span class="comment">&lt;?import griffon.javafx.support.octicons.OctIcon?&gt;</span>
+
+<span class="tag">&lt;GridPane</span> <span class="attribute-name">prefHeight</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">60.0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">prefWidth</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">200.0</span><span class="delimiter">&quot;</span></span>
+          <span class="attribute-name">xmlns:fx</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://javafx.com/fxml</span><span class="delimiter">&quot;</span></span>
+          <span class="attribute-name">fx:controller</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.example.AppController</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;children&gt;</span>
+        <span class="tag">&lt;Button</span> <span class="attribute-name">fx:id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">preferencesActionTarget</span><span class="delimiter">&quot;</span></span>
+                <span class="attribute-name">GridPane.columnIndex</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">GridPane.rowIndex</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0</span><span class="delimiter">&quot;</span></span>
+                <span class="attribute-name">mnemonicParsing</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">false</span><span class="delimiter">&quot;</span></span>
+                <span class="attribute-name">prefWidth</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">200.0</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+            <span class="tag">&lt;graphic&gt;</span>
+                <span class="tag">&lt;OctIcon</span> <span class="attribute-name">octIcon</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ZAP</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">iconSize</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">64</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+            <span class="tag">&lt;/graphic&gt;</span>
+        <span class="tag">&lt;/Button&gt;</span>
+    <span class="tag">&lt;/children&gt;</span>
+<span class="tag">&lt;/GridPane&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The JavaFX icon requires the usage of the <code>OctIcon</code> enum value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_action_resources"><a class="anchor" href="#_action_resources"></a>2.3. Action Resources</h3>
+<div class="paragraph">
+<p>Action icons can be set using resources files if the following format is used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>iconClassName|name:size:color</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>size</code> and <code>color</code> are optional.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example using the Swing icon</p>
+</div>
+<div class="listingblock">
+<div class="title">griffon-app/i18n/messages.properties</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">org.example.AppController.action.Preferences.small_icon=griffon.swing.support.octicons.OctIcon|zap:<span class="integer">64</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The JavaFX version for the same icon value is</p>
+</div>
+<div class="listingblock">
+<div class="title">griffon-app/i18n/messages.properties</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">org.example.AppController.action.Preferences.icon=griffon.javafx.support.octicons.OctIcon|zap:<span class="integer">64</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>3. Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The plugin delivers artifacts for both Swing and JavaFX. It also contains Groovy enhancements
+that can be used in combination with the respective UI toolkit DSL (SwingBuilder and GroovyFX).</p>
+</div>
+<div class="sect2">
+<h3 id="_gradle"><a class="anchor" href="#_gradle"></a>3.1. Gradle</h3>
+<div class="paragraph">
+<p>You have two options for configuring this plugin: automatic and manual.</p>
+</div>
+<div class="sect3">
+<h4 id="_automatic"><a class="anchor" href="#_automatic"></a>3.1.1. Automatic</h4>
+<div class="paragraph">
+<p>As long as the project has the <code>org.codehaus.griffon.griffon</code> plugin applied to it you
+may include the following snippet in build.gradle</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
+    griffon 'org.codehaus.griffon.plugins:griffon-octicons-plugin:1.0.0'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>griffon</code> plugin will take care of the rest given its configuration.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_manual"><a class="anchor" href="#_manual"></a>3.1.2. Manual</h4>
+<div class="paragraph">
+<p>You will need to configure any of the following blocks depending on your setup</p>
+</div>
+<div class="listingblock">
+<div class="title">Java + Swing</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-swing:1.0.0'
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Java + JavaFX</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-javafx:1.0.0'
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Groovy + Swing</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-swing-groovy:1.0.0'
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Groovy + JavaFX</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-javafx-groovy:1.0.0'
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maven"><a class="anchor" href="#_maven"></a>3.2. Maven</h3>
+<div class="paragraph">
+<p>First configure the <code>griffon-octicons-plugin</code> BOM in your POM file, by placing the following
+snippet before the <code>&lt;build&gt;</code> element</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="xml"><span class="tag">&lt;dependencyManagement&gt;</span>
+    <span class="tag">&lt;dependencies&gt;</span>
+        <span class="tag">&lt;dependency&gt;</span>
+            <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
+            <span class="tag">&lt;artifactId&gt;</span>griffon-octicons-plugin<span class="tag">&lt;/artifactId&gt;</span>
+            <span class="tag">&lt;version&gt;</span>1.0.0<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
+            <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
+        <span class="tag">&lt;/dependency&gt;</span>
+    <span class="tag">&lt;/dependencies&gt;</span>
+<span class="tag">&lt;/dependencyManagement&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next configure dependencies as required by your particular setup</p>
+</div>
+<div class="listingblock">
+<div class="title">Java + Swing</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>griffon-octicons-swing<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Java + JavaFX</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>griffon-octicons-javafx<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Groovy + Swing</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>griffon-octicons-swing-groovy<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Groovy + JavaFX</div>
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>griffon-octicons-javafx-groovy<span class="tag">&lt;/artifactId&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_modules"><a class="anchor" href="#_modules"></a>4. Modules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following sections display all bindings per module. Use this information to
+successfully override a binding on your own modules or to troubleshoot a module
+binding if the wrong type has been applied by the Griffon runtime.</p>
+</div>
+<div class="sect2">
+<h3 id="_javafx_2"><a class="anchor" href="#_javafx_2"></a>4.1. JavaFX</h3>
+<div class="paragraph">
+<p>Module name: octicons-javafx-groovy</p>
+</div>
+<div class="paragraph">
+<p>Depends on: javafx-groovy</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="java">bind(BuilderCustomizer.class)
+    .to(OctIconsJavaFXBuilderCustomizer.class)
+    .asSingleton();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following nodes will become available on a Groovy View</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">octIcon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="api/griffon/javafx/support/octicons/OctIcon.html" target="_blank">griffon.javafx.support.octicons.OctIcon</a></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_swing_2"><a class="anchor" href="#_swing_2"></a>4.2. Swing</h3>
+<div class="paragraph">
+<p>Module name: octicons-swing-groovy</p>
+</div>
+<div class="paragraph">
+<p>Depends on: swing-groovy</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight nowrap"><code data-lang="java">bind(BuilderCustomizer.class)
+    .to(OctIconsSwingBuilderCustomizer.class)
+    .asSingleton();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following nodes will become available on a Groovy View</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Node</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">octIcon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="api/griffon/swing/support/octicons/OctIcon.html" target="_blank">griffon.swing.support.octicons.OctIcon</a></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_links"><a class="anchor" href="#_links"></a>5. Links</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="api/index.html" target="_blank">Javadoc</a></p>
+</div>
+<div class="paragraph">
+<p><a href="api-src/index.html" target="_blank">API Sources</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="icon_cheat_cheet"><a class="anchor" href="#icon_cheat_cheet"></a>6. Icon Cheat Sheet</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following tables show all available icons.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Enum</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Icon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALERT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alert</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-alert"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALIGNMENT_ALIGN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alignment-align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-alignment-align"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALIGNMENT_ALIGNED_TO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alignment-aligned-to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-alignment-aligned-to"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALIGNMENT_UNALIGN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alignment-unalign</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-alignment-unalign"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-down"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_LEFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-left</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-left"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_RIGHT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-right</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-right"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_SMALL_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-small-down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-small-down"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_SMALL_LEFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-small-left</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-small-left"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_SMALL_RIGHT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-small-right</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-small-right"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_SMALL_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-small-up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-small-up"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ARROW_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arrow-up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-arrow-up"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BEER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">beer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-beer"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">book</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-book"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOKMARK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bookmark</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-bookmark"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BRIEFCASE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">briefcase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-briefcase"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BROADCAST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">broadcast</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-broadcast"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BROWSER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">browser</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-browser"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BUG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bug</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-bug"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CALENDAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">calendar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-calendar"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHECK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-check"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHECKLIST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">checklist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-checklist"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHEVRON_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chevron-down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-chevron-down"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHEVRON_LEFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chevron-left</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-chevron-left"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHEVRON_RIGHT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chevron-right</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-chevron-right"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHEVRON_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chevron-up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-chevron-up"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIRCLE_SLASH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">circle-slash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-circle-slash"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIRCUIT_BOARD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">circuit-board</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-circuit-board"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLIPPY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clippy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-clippy"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLOCK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clock</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-clock"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLOUD_DOWNLOAD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cloud-download</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-cloud-download"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLOUD_UPLOAD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cloud-upload</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-cloud-upload"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CODE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-code"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COLOR_MODE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">color-mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-color-mode"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COMMENT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">comment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-comment"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COMMENT_ADD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">comment-add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-comment-add"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COMMENT_DISCUSSION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">comment-discussion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-comment-discussion"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CREDIT_CARD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">credit-card</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-credit-card"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DASH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dash</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-dash"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DASHBOARD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dashboard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-dashboard"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">database</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-database"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_CAMERA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">device-camera</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-device-camera"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_CAMERA_VIDEO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">device-camera-video</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-device-camera-video"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_DESKTOP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">device-desktop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-device-desktop"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVICE_MOBILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">device-mobile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-device-mobile"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIFF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diff</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-diff"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIFF_ADDED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diff-added</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-diff-added"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIFF_IGNORED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diff-ignored</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-diff-ignored"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIFF_MODIFIED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diff-modified</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-diff-modified"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIFF_REMOVED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diff-removed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-diff-removed"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIFF_RENAMED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">diff-renamed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-diff-renamed"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ELLIPSIS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ellipsis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-ellipsis"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EYE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eye</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-eye"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EYE_UNWATCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eye-unwatch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-eye-unwatch"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EYE_WATCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eye-watch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-eye-watch"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_ADD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-add"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_BINARY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-binary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-binary"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_CODE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-code"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_DIRECTORY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-directory"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_DIRECTORY_CREATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-directory-create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-directory-create"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_MEDIA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-media</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-media"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_PDF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-pdf</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-pdf"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_SUBMODULE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-submodule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-submodule"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_SYMLINK_DIRECTORY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-symlink-directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-symlink-directory"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_SYMLINK_FILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-symlink-file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-symlink-file"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-text"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FILE_ZIP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file-zip</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-file-zip"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLAME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">flame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-flame"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FOLD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-fold"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GEAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gear</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-gear"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gift</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-gift"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-gist"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIST_FORK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gist-fork</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-gist-fork"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIST_NEW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gist-new</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-gist-new"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIST_PRIVATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gist-private</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-gist-private"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIST_SECRET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gist-secret</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-gist-secret"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_BRANCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-branch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-branch"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_BRANCH_CREATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-branch-create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-branch-create"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_BRANCH_DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-branch-delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-branch-delete"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_COMMIT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-commit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-commit"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_COMPARE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-compare</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-compare"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_FORK_PRIVATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-fork-private</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-fork-private"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_MERGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-merge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-merge"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_PULL_REQUEST_ABANDONED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-pull-request-abandoned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-pull-request-abandoned"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GIT_PULL_REQUEST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">git-pull-request</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-git-pull-request"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GLOBE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">globe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-globe"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GRAPH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">graph</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-graph"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HEART</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">heart</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-heart"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HISTORY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-history"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">home</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-home"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HORIZONTAL_RULE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">horizontal-rule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-horizontal-rule"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOURGLASS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hourglass</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-hourglass"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HUBOT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hubot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-hubot"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INBOX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inbox</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-inbox"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INFO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">info</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-info"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISSUE_CLOSED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">issue-closed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-issue-closed"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISSUE_OPENED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">issue-opened</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-issue-opened"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISSUE_REOPENED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">issue-reopened</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-issue-reopened"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JERSEY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jersey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-jersey"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jump-down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-jump-down"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP_LEFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jump-left</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-jump-left"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP_RIGHT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jump-right</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-jump-right"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jump-up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-jump-up"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KEY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-key"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">KEYBOARD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keyboard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-keyboard"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LAW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">law</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-law"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LIGHT_BULB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">light-bulb</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-light-bulb"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LINK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">link</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-link"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LINK_EXTERNAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">link-external</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-link-external"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LIST_ORDERED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list-ordered</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-list-ordered"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LIST_UNORDERED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list-unordered</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-list-unordered"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCATION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">location</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-location"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lock</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-lock"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOGO_GITHUB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logo-github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-logo-github"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOG_IN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">log-in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-log-in"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOG_OUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">log-out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-log-out"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAIL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mail"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAIL_READ</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mail-read</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mail-read"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAIL_REPLY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mail-reply</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mail-reply"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MARKDOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">markdown</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-markdown"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MARK_GITHUB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mark-github</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mark-github"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MEGAPHONE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">megaphone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-megaphone"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MENTION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mention</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mention"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MICROSCOPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">microscope</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-microscope"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MILESTONE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">milestone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-milestone"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIRROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mirror</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mirror"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIRROR_PRIVATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mirror-private</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mirror-private"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIRROR_PUBLIC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mirror-public</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mirror-public"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MORTAR_BOARD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mortar-board</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mortar-board"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOVE_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">move-down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-move-down"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOVE_LEFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">move-left</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-move-left"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOVE_RIGHT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">move-right</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-move-right"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOVE_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">move-up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-move-up"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-mute"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NO_NEWLINE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no-newline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-no-newline"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OCTOFACE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">octoface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-octoface"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ORGANIZATION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">organization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-organization"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PACKAGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">package</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-package"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PAINTCAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">paintcan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-paintcan"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PENCIL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pencil</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-pencil"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PERSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-person"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PERSON_ADD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">person-add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-person-add"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PERSON_FOLLOW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">person-follow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-person-follow"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-pin"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PLAYBACK_FAST_FORWARD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">playback-fast-forward</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-playback-fast-forward"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PLAYBACK_PAUSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">playback-pause</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-playback-pause"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PLAYBACK_PLAY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">playback-play</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-playback-play"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PLAYBACK_REWIND</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">playback-rewind</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-playback-rewind"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PLUG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">plug</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-plug"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PLUS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">plus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-plus"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PODIUM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">podium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-podium"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PRIMITIVE_DOT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">primitive-dot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-primitive-dot"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PRIMITIVE_SQUARE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">primitive-square</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-primitive-square"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PULSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pulse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-pulse"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUZZLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">puzzle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-puzzle"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QUESTION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">question</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-question"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QUOTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">quote</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-quote"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RADIO_TOWER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">radio-tower</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-radio-tower"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REMOVE_CLOSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove-close</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-remove-close"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_CLONE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-clone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-clone"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_CREATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-create"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-delete"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_FORCE_PUSH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-force-push</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-force-push"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_FORKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-forked</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-forked"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_PULL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-pull</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-pull"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_PUSH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-push</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-push"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REPO_SYNC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repo-sync</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-repo-sync"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROCKET</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rocket</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-rocket"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RSS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rss</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-rss"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RUBY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ruby</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-ruby"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SCREEN_FULL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">screen-full</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-screen-full"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SCREEN_NORMAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">screen-normal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-screen-normal"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SEARCH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-search"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SEARCH_SAVE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search-save</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-search-save"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SERVER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">server</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-server"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SETTINGS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">settings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-settings"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIGN_IN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sign-in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-sign-in"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIGN_OUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sign-out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-sign-out"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SPLIT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">split</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-split"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQUIRREL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">squirrel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-squirrel"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">star</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-star"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STAR_ADD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">star-add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-star-add"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STAR_DELETE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">star-delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-star-delete"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STEPS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">steps</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-steps"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STOP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-stop"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SYNC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sync</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-sync"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TAG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-tag"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TAG_ADD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tag-add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-tag-add"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TAG_REMOVE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tag-remove</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-tag-remove"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TELESCOPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">telescope</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-telescope"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TERMINAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">terminal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-terminal"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">THREE_BARS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">three-bars</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-three-bars"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">THUMBSDOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">thumbsdown</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-thumbsdown"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">THUMBSUP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">thumbsup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-thumbsup"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOOLS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tools</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-tools"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TRASHCAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">trashcan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-trashcan"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TRIANGLE_DOWN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">triangle-down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-triangle-down"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TRIANGLE_LEFT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">triangle-left</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-triangle-left"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TRIANGLE_RIGHT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">triangle-right</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-triangle-right"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TRIANGLE_UP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">triangle-up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-triangle-up"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNFOLD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unfold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-unfold"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNMUTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unmute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-unmute"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VERSIONS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">versions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-versions"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-x"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZAP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zap</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="mega-octicon octicon-zap"></span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0.0<br>
+Last updated 2015-02-26 14:17:40 CET
+</div>
+</div>
+</body>
+</html>

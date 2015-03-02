@@ -1,0 +1,8 @@
+griffon.builder.javafx
+griffon.builder.swing
+griffon.builder.swing.factory
+griffon.javafx.support.octicons
+griffon.plugins.octicons
+griffon.swing.support.octicons
+org.codehaus.griffon.runtime.javafx.octicons
+org.codehaus.griffon.runtime.swing.octicons

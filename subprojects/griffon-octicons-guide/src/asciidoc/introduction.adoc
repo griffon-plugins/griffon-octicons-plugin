@@ -16,3 +16,6 @@ Applies to all font files
 
 Code License: MIT (http://choosealicense.com/licenses/mit/) +
 Applies to all other files
+
+Griffon version: {griffon-version}
+

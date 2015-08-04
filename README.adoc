@@ -9,7 +9,7 @@ image:https://api.bintray.com/packages/griffon/griffon-plugins/{project-name}/im
 
 ---
 
-link:https://github.com/stephenhutchings/octicons.font[OctIcons, window="_blank"] gives you scalable vector icons.
+link:https://github.com/github/octicons[OctIcons, window="_blank"] gives you scalable vector icons.
 
 Refer to the link:http://griffon-plugins.github.io/{project-name}/[plugin guide, window="_blank"] for
 further information on configuration and usage.

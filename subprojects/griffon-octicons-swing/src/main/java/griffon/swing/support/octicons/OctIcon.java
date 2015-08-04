@@ -41,7 +41,7 @@ import static java.util.Objects.requireNonNull;
  * @author Andres Almiray
  */
 public class OctIcon implements Icon {
-    private static final String OCTICON_SET = "META-INF/resources/octicons/2.2.0/fonts/octicons.ttf";
+    private static final String OCTICON_SET = "META-INF/resources/octicons/2.4.1/fonts/octicons.ttf";
     private static final String ERROR_OCTICON_NULL = "Argument 'octIcon' must not be null";
 
     private static final Font OCTICONFONT;

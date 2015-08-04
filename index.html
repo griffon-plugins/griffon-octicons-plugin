@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
 <meta name="author" content="Andres Almiray">
-<title>Griffon Typ Icon Font Plugin</title>
+<title>Griffon Octicon Font Plugin</title>
 <link rel="stylesheet" href="./css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./coderay-asciidoctor.css">
@@ -14,10 +14,10 @@
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Griffon Typ Icon Font Plugin</h1>
+<h1>Griffon Octicon Font Plugin</h1>
 <div class="details">
 <span id="author" class="author">Andres Almiray</span><br>
-<span id="revnumber">version 1.0.0</span>
+<span id="revnumber">version 1.1.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -57,11 +57,11 @@
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://github.com/stephenhutchings/octicons.font" target="_blank">OctIcons</a> gives you scalable vector icons.
+<p><a href="https://github.com/github/octicons" target="_blank">OctIcons</a> gives you scalable vector icons.
 This plugin enables toolkit specific icon support.</p>
 </div>
 <div class="paragraph">
-<p>Currently supported Octicons version is <code>2.2.0</code>.</p>
+<p>Currently supported Octicons version is <code>2.4.1</code>.</p>
 </div>
 <div class="paragraph">
 <p>Octicons is &#169; 2012-2015 GitHub</p>
@@ -78,7 +78,7 @@ Applies to all font files</p>
 Applies to all other files</p>
 </div>
 <div class="paragraph">
-<p>Griffon version: 2.2.0</p>
+<p>Griffon version: 2.3.0</p>
 </div>
 </div>
 </div>
@@ -88,14 +88,14 @@ Applies to all other files</p>
 <div class="sect2">
 <h3 id="_swing"><a class="anchor" href="#_swing"></a>2.1. Swing</h3>
 <div class="paragraph">
-<p>The <code>griffon-octicons-swing:1.0.0</code> JAR provides a new Icon class: <code><a href="api/griffon/swing/support/octicons/OctIcon.html" target="_blank">griffon.swing.support.octicons.OctIcon</a></code>.
+<p>The <code>griffon-octicons-swing:1.1.0</code> JAR provides a new Icon class: <code><a href="api/griffon/swing/support/octicons/OctIcon.html" target="_blank">griffon.swing.support.octicons.OctIcon</a></code>.
 You may use this class with any Swing component that supports an Icon property.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_javafx"><a class="anchor" href="#_javafx"></a>2.2. JavaFX</h3>
 <div class="paragraph">
-<p>The <code>griffon-octicons-javafx:1.0.0</code> JAR provides a new Node class: <code><a href="api/griffon/javafx/support/octicons/OctIcon.html" target="_blank">griffon.javafx.support.octicons.OctIcon</a></code>.
+<p>The <code>griffon-octicons-javafx:1.1.0</code> JAR provides a new Node class: <code><a href="api/griffon/javafx/support/octicons/OctIcon.html" target="_blank">griffon.javafx.support.octicons.OctIcon</a></code>.
 You may use this class with any JavaFX control that accepts a graphic property. You may also use the icon directly as
 it is a subclass of <code>javafx.scene.control.Label</code>. The icon class can be used inside an FXML file too.</p>
 </div>
@@ -182,7 +182,7 @@ may include the following snippet in build.gradle</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
-    griffon 'org.codehaus.griffon.plugins:griffon-octicons-plugin:1.0.0'
+    griffon 'org.codehaus.griffon.plugins:griffon-octicons-plugin:1.1.0'
 }</code></pre>
 </div>
 </div>
@@ -199,7 +199,7 @@ may include the following snippet in build.gradle</p>
 <div class="title">Java + Swing</div>
 <div class="content">
 <pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
-    compile 'org.codehaus.griffon.plugins:griffon-octicons-swing:1.0.0'
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-swing:1.1.0'
 }</code></pre>
 </div>
 </div>
@@ -207,7 +207,7 @@ may include the following snippet in build.gradle</p>
 <div class="title">Java + JavaFX</div>
 <div class="content">
 <pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
-    compile 'org.codehaus.griffon.plugins:griffon-octicons-javafx:1.0.0'
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-javafx:1.1.0'
 }</code></pre>
 </div>
 </div>
@@ -215,7 +215,7 @@ may include the following snippet in build.gradle</p>
 <div class="title">Groovy + Swing</div>
 <div class="content">
 <pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
-    compile 'org.codehaus.griffon.plugins:griffon-octicons-swing-groovy:1.0.0'
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-swing-groovy:1.1.0'
 }</code></pre>
 </div>
 </div>
@@ -223,7 +223,7 @@ may include the following snippet in build.gradle</p>
 <div class="title">Groovy + JavaFX</div>
 <div class="content">
 <pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
-    compile 'org.codehaus.griffon.plugins:griffon-octicons-javafx-groovy:1.0.0'
+    compile 'org.codehaus.griffon.plugins:griffon-octicons-javafx-groovy:1.1.0'
 }</code></pre>
 </div>
 </div>
@@ -242,7 +242,7 @@ snippet before the <code>&lt;build&gt;</code> element</p>
         <span class="tag">&lt;dependency&gt;</span>
             <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>griffon-octicons-plugin<span class="tag">&lt;/artifactId&gt;</span>
-            <span class="tag">&lt;version&gt;</span>1.0.0<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>1.1.0<span class="tag">&lt;/version&gt;</span>
             <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
             <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
         <span class="tag">&lt;/dependency&gt;</span>
@@ -1444,7 +1444,7 @@ binding if the wrong type has been applied by the Griffon runtime.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.0<br>
+Version 1.1.0<br>
 Last updated 2015-02-26 14:17:40 CET
 </div>
 </div>

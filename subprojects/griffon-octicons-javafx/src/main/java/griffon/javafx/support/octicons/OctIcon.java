@@ -17,7 +17,14 @@ package griffon.javafx.support.octicons;
 
 import griffon.core.editors.PropertyEditorResolver;
 import griffon.plugins.octicons.OctIconFont;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -34,7 +41,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class OctIcon extends Text {
     private static final String OCTICON_SET = "META-INF/resources/octicons/2.4.1/fonts/octicons.ttf";
-    private static final String ERROR_FONT_OCTICON_NULL = "Argument 'octIcon' must not be null";
+    private static final String ERROR_OCTICON_NULL = "Argument 'octIcon' must not be null";
 
     private static final String OCTICON_FONT_FAMILY;
 
@@ -43,16 +50,30 @@ public class OctIcon extends Text {
         OCTICON_FONT_FAMILY = font.getFamily();
     }
 
-    private OctIconFont octIcon;
-    private int iconSize;
-    private Color iconColor;
+    private ObjectProperty<OctIconFont> octIcon;
+    private IntegerProperty iconSize;
+    private ObjectProperty<Paint> iconColor;
+
+    private ChangeListener<Number> iconSizeChangeListener = new ChangeListener<Number>() {
+        @Override
+        public void changed(ObservableValue<? extends Number> v, Number o, Number n) {
+            setStyle(getStyle() + " -fx-font-size: " + n + "px;");
+        }
+    };
+
+    private ChangeListener<Paint> iconColorChangeListener = new ChangeListener<Paint>() {
+        @Override
+        public void changed(ObservableValue<? extends Paint> v, Paint o, Paint n) {
+            setFill(n);
+        }
+    };
 
     public OctIcon() {
         this(OctIconFont.ZAP);
     }
 
     public OctIcon(@Nonnull OctIconFont octIcon) {
-        this.octIcon = requireNonNull(octIcon, ERROR_FONT_OCTICON_NULL);
+        setOctIconFont(requireNonNull(octIcon, ERROR_OCTICON_NULL));
         getStyleClass().add("octicons-icon");
         setText(String.valueOf(octIcon.getCode()));
         setStyle("-fx-font-family: '" + OCTICON_FONT_FAMILY + "';");
@@ -63,46 +84,78 @@ public class OctIcon extends Text {
     public OctIcon(@Nonnull String description) {
         this(OctIconFont.findByDescription(description));
         resolveSize(description);
-        resolveColor(description);
+        resolvePaint(description);
+    }
+
+    public ObjectProperty<OctIconFont> octIconProperty() {
+        if (octIcon == null) {
+            octIcon = new SimpleObjectProperty<>(this, "octIcon", null);
+        }
+        return octIcon;
+    }
+
+    public ObjectProperty<OctIconFont> getOctIconProperty() {
+        return octIconProperty();
+    }
+
+    public IntegerProperty iconSizeProperty() {
+        if (iconSize == null) {
+            iconSize = new SimpleIntegerProperty(this, "iconSize", 16);
+            iconSize.addListener(iconSizeChangeListener);
+        }
+        return iconSize;
+    }
+
+    public IntegerProperty getIconSizeProperty() {
+        return iconSizeProperty();
+    }
+
+    public ObjectProperty<Paint> iconColorProperty() {
+        if (iconColor == null) {
+            iconColor = new SimpleObjectProperty<>(this, "iconColor", null);
+            iconColor.addListener(iconColorChangeListener);
+        }
+        return iconColor;
+    }
+
+    public ObjectProperty<Paint> getIconColorProperty() {
+        return iconColorProperty();
     }
 
     @Nonnull
     public OctIconFont getOctIconFont() {
-        return octIcon;
+        return octIconProperty().get();
     }
 
-    public void setOctIcon(@Nonnull OctIconFont octIcon) {
-        this.octIcon = requireNonNull(octIcon, ERROR_FONT_OCTICON_NULL);
+    public void setOctIconFont(@Nonnull OctIconFont octIcon) {
+        octIconProperty().set(requireNonNull(octIcon, ERROR_OCTICON_NULL));
         setText(String.valueOf(octIcon.getCode()));
     }
 
-    public void setOctIcon(@Nonnull String description) {
+    public void setOctIconFont(@Nonnull String description) {
         requireNonBlank(description, "Argument 'description' must not be blank");
-        setOctIcon(OctIconFont.findByDescription(description));
+        octIconProperty().set(OctIconFont.findByDescription(description));
         resolveSize(description);
-        resolveColor(description);
+        resolvePaint(description);
     }
 
     public void setIconSize(int size) {
         requireState(size > 0, "Argument 'size' must be greater than zero.");
-        setStyle(getStyle() + " -fx-font-size: " + size + "px;");
-        this.iconSize = size;
+        iconSizeProperty().set(size);
     }
 
     public int getIconSize() {
-        return iconSize;
+        return iconSizeProperty().get();
     }
 
-
-    public void setIconColor(@Nonnull Color color) {
+    public void setIconColor(@Nonnull Paint color) {
         requireNonNull(color, "Argument 'color' must not be null");
-        setFill(color);
-        this.iconColor = color;
+        iconColorProperty().set(color);
     }
 
     @Nonnull
-    public Color getIconColor() {
-        return iconColor;
+    public Paint getIconColor() {
+        return iconColorProperty().get();
     }
 
     private void resolveSize(String description) {
@@ -118,14 +171,14 @@ public class OctIcon extends Text {
         }
     }
 
-    private void resolveColor(String description) {
+    private void resolvePaint(String description) {
         String[] parts = description.split(":");
         if (parts.length > 2) {
-            PropertyEditor editor = PropertyEditorResolver.findEditor(Color.class);
+            PropertyEditor editor = PropertyEditorResolver.findEditor(Paint.class);
             editor.setValue(parts[2]);
-            Color color = (Color) editor.getValue();
-            if (color != null) {
-                setIconColor(color);
+            Paint paint = (Paint) editor.getValue();
+            if (paint != null) {
+                setIconColor(paint);
             }
         }
     }
